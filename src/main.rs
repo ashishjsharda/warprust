@@ -1,12 +1,7 @@
-
-
-fn main() {
-   let mut v=Vec::new();
-   v.push(1);
-    v.push(2);
-    v.push(3);
-    v.push(4);
-   println!("{:?}",v);
-
+use warp::Filter;
+async fn main() {
+    let hello = warp::path!("hello" / String)
+        .map(|name| format!("Hello, {}!", name));
+    warp::serve(hello).run(([127, 0, 0, 1], 3030)).await;
 
 }
