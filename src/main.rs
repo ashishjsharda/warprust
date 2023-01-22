@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use warp::Filter;
 
@@ -7,7 +8,15 @@ struct Item {
 }
 
 struct Store {
-    grocery: Arc<RwLock<Items>>,
+    grocery_list: Arc<RwLock<Items>>,
+}
+
+impl Store{
+    fn new() -> Self {
+        Store {
+            grocery_list: Arc::new(RwLock::new(HashMap::new())),
+        }
+    }
 }
 
 async fn main() {
